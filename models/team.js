@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-var async = require('async');
 var postFind = require('mongoose-post-find');
+var async = require('async');
 
 var schema = new mongoose.Schema({
 
@@ -13,12 +13,11 @@ var schema = new mongoose.Schema({
     }
 });
 
-function _attachMembers(Employee, result, callback){
-
+function _attachMembers (Employee, result, callback) {
     Employee.find({
         team: result._id
-    }, function(error, employees){
-        if(error){
+    }, function (error, employees) {
+        if (error) {
             return callback(error);
         }
         result.members = employees;
@@ -28,23 +27,20 @@ function _attachMembers(Employee, result, callback){
 
 //listen for find and findOne
 schema.plugin(postFind, {
-    find: function(result, callback){
+    find: function (result, callback) {
         var Employee = mongoose.model('Employee');
-
-        async.each(result, function(item, callback){
+        async.each(result, function (item, callback) {
             _attachMembers(Employee, item, callback);
-
-        }, function(error){
-           if(error){
-               return callback(error);
-           }
-           callback(null, result);
+        }, function (error) {
+            if (error) {
+                return callback(error);
+            }
+            callback(null, result)
         });
     },
-    findOne: function(result, callback){
+    findOne: function (result, callback) {
         var Employee = mongoose.model('Employee');
         _attachMembers(Employee, result, callback);
     }
 });
-
 module.exports = mongoose.model('Team', schema);
