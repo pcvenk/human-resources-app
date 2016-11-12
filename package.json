@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "colors": "^1.1.2"
+    "async": "^2.1.2",
+    "colors": "^1.1.2",
+    "mongoose": "^4.6.6",
+    "mongoose-post-find": "0.0.2"
   }
 }
