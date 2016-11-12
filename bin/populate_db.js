@@ -154,7 +154,7 @@ var updateEmployeeTeams = function (callback) {
         multi: true
     }, function (error, numberAffected, response) {
         if (error) {
-            console.error('Error updating employe team: ' + error);
+            console.error('Error updating employee team: ' + error);
         }
         console.info('Done updating employee teams');
         callback();
