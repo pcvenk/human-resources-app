@@ -4,7 +4,32 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<script src="script.js"></script>
+
 <body>
 <h1>Human resources app</h1>
+<div ng-controller="main">
+    <input type="text" ng-model="firstName" placeholder="first name">
+    <input type="text" ng-model="lastName" placeholder="first name">
+    <button ng-disabled="!(firstName.length && lastName.length)"
+            ➥ng-click="add()">Add</button>
+    <table>
+        <tr ng-repeat="p in employees">
+            <td>{{p.id}}</td>
+            <td><span>{{p.first}} {{p.last}}</span></td>
+            <td><button ng-click="$parent.remove(p)">Remove</button>
+                ➥</td>
+        </tr>
+    </table>
+</div>
+
+<div ng-controller="logger">
+      <pre>
+        <p ng-repeat="e in events track by $index">{{$index}} - ➥{{e}}</p>
+      </pre>
+</div>
+
 </body>
 </html>
